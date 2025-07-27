@@ -16,7 +16,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/adminka
+  IMAGE_NAME: station-2290/adminka
 
 jobs:
   test:
