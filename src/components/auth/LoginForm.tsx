@@ -33,7 +33,7 @@ export function LoginForm() {
       setError(null);
       await login(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Произошла ошибка при входе');
+      setError(err instanceof Error ? err.message : 'Произошла ошибка при входе.');
     }
   };
 
