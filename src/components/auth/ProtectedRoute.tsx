@@ -1,11 +1,11 @@
-import { type ReactNode } from 'react';
-import { useAuth } from '@/shared/auth';
 import { LoginForm } from './LoginForm';
+import type {ReactNode} from 'react';
+import { useAuth } from '@/shared/auth';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  requiredRoles?: string[];
+  requiredRoles?: Array<string>;
 }
 
 export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps) {

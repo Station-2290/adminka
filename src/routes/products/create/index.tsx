@@ -1,5 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { ArrowLeft, Save } from 'lucide-react';
+import type { components } from '@/__generated__/api/index';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -7,11 +9,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Save } from 'lucide-react';
 import { useCreateProduct } from '@/hooks/useProducts';
 import { useCategories } from '@/hooks/useCategories';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
-import type { components } from '@/__generated__/api/index';
 
 type CreateProductDto = components['schemas']['CreateProductDto'];
 type Category = components['schemas']['Category'];
@@ -57,7 +57,7 @@ function CreateProductPage() {
 
   const generateSKU = (name: string, categoryId: number) => {
     const category = categories.find((c: Category) => c.id === categoryId);
-    const categoryPrefix = category?.slug?.substring(0, 3).toUpperCase() || 'PRD';
+    const categoryPrefix = category?.slug.substring(0, 3).toUpperCase() || 'PRD';
     const namePrefix = name.substring(0, 3).toUpperCase();
     const randomNum = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
     return `${categoryPrefix}-${namePrefix}-${randomNum}`;
@@ -105,7 +105,8 @@ function CreateProductPage() {
       newErrors.category_id = 'Выберите категорию';
     }
 
-    if (formData.volume_ml !== null && formData.volume_ml <= 0) {
+    // @ts-expect-error - todo: fix this
+    if (formData.volume_ml !== null && (formData.volume_ml ?? 0) <= 0) {
       newErrors.volume_ml = 'Объем должен быть больше 0';
     }
 

@@ -1,11 +1,11 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
+import { AlertCircle, ArrowLeft, Calendar, Edit, Package, RefreshCw, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { ArrowLeft, Edit, Trash2, Package, AlertCircle, Calendar, RefreshCw } from 'lucide-react';
-import { useProduct, useDeleteProduct } from '@/hooks/useProducts';
+import { useDeleteProduct, useProduct } from '@/hooks/useProducts';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 export const Route = createFileRoute('/products/$id/')({

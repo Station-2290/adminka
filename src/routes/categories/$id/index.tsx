@@ -1,16 +1,15 @@
-import { createFileRoute, useNavigate, useParams, Link } from '@tanstack/react-router';
+import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
+import { AlertCircle, ArrowLeft, Calendar, Coffee, Edit, Eye, Package, RefreshCw, Trash2 } from 'lucide-react';
+import type { components } from '@/__generated__/api/index';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { ArrowLeft, Edit, Trash2, Coffee, AlertCircle, Calendar, RefreshCw, Package, Eye } from 'lucide-react';
 import { useCategory, useDeleteCategory } from '@/hooks/useCategories';
 import { useProducts } from '@/hooks/useProducts';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
-import type { components } from '@/__generated__/api/index';
 
-type Category = components['schemas']['Category'];
 type Product = components['schemas']['Product'];
 
 export const Route = createFileRoute('/categories/$id/')({
@@ -26,9 +25,9 @@ function CategoryDetailPage() {
   const { data: productsResponse } = useProducts(1, 100);
   const deleteCategoryMutation = useDeleteCategory();
 
-  const categoryProducts = productsResponse?.data?.filter(
+  const categoryProducts = productsResponse?.data.filter(
     (product: Product) => product.category_id === categoryId
-  ) || [];
+  );
 
   useDocumentTitle({
     title: category ? `${category.name} - Категория` : 'Детали категории',
@@ -37,7 +36,7 @@ function CategoryDetailPage() {
   });
 
   const handleDelete = async () => {
-    if (categoryProducts.length > 0) {
+    if ((categoryProducts?.length ?? 0) > 0) {
       alert('Невозможно удалить категорию с товарами. Сначала переместите или удалите все товары из этой категории.');
       return;
     }
@@ -51,8 +50,8 @@ function CategoryDetailPage() {
         params: { path: { id: categoryId } }
       });
       navigate({ to: '/categories' });
-    } catch (error) {
-      console.error('Failed to delete category:', error);
+    } catch (responseError) {
+      console.error('Failed to delete category:', responseError);
     }
   };
 
@@ -157,7 +156,7 @@ function CategoryDetailPage() {
             variant="destructive" 
             className="flex-1 sm:flex-none"
             onClick={handleDelete}
-            disabled={deleteCategoryMutation.isPending || categoryProducts.length > 0}
+            disabled={deleteCategoryMutation.isPending || (categoryProducts?.length ?? 0) > 0}
           >
             <Trash2 className="h-4 w-4 mr-2" />
             {deleteCategoryMutation.isPending ? 'Удаление...' : 'Удалить'}
@@ -208,18 +207,18 @@ function CategoryDetailPage() {
               <div>
                 <h3 className="font-semibold mb-2">Количество товаров</h3>
                 <div className="flex items-center gap-2">
-                  <span className="text-xl font-bold">{categoryProducts.length}</span>
+                  <span className="text-xl font-bold">{categoryProducts?.length ?? 0}</span>
                   <Badge variant="outline">
                     {'product_count' in category ? (category.product_count as number) : 0} шт.
                   </Badge>
                 </div>
               </div>
 
-              {categoryProducts.length > 0 && (
+              {(categoryProducts?.length ?? 0) > 0 && (
                 <div>
                   <h3 className="font-semibold mb-2">Активные товары</h3>
                   <p className="text-muted-foreground">
-                    {categoryProducts.filter((p: Product) => p.is_active).length} из {categoryProducts.length}
+                    {categoryProducts?.filter((p: Product) => p.is_active).length} из {categoryProducts?.length ?? 0}
                   </p>
                 </div>
               )}
@@ -256,7 +255,7 @@ function CategoryDetailPage() {
       </div>
 
       {/* Products in this category */}
-      {categoryProducts.length > 0 && (
+      {(categoryProducts?.length ?? 0) > 0 && (
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -269,7 +268,7 @@ function CategoryDetailPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              {categoryProducts.map((product: Product) => (
+              {categoryProducts?.map((product: Product) => (
                 <div key={product.id} className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/50 transition-colors">
                   <div className="flex items-center gap-3">
                     <div>

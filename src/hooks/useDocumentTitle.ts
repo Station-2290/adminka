@@ -19,20 +19,16 @@ export function useDocumentTitle({ title, description, keywords }: UseDocumentTi
       const selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`;
       let metaTag = document.querySelector(selector) as HTMLMetaElement;
       
-      if (metaTag) {
-        previousMeta.set(name, metaTag.getAttribute('content') || '');
-      }
+      previousMeta.set(name, metaTag.getAttribute('content') || '');
       
-      if (!metaTag) {
-        metaTag = document.createElement('meta');
-        if (property) {
-          metaTag.setAttribute('property', name);
-        } else {
-          metaTag.setAttribute('name', name);
-        }
-        document.head.appendChild(metaTag);
-        previousMeta.set(name, '');
+      metaTag = document.createElement('meta');
+      if (property) {
+        metaTag.setAttribute('property', name);
+      } else {
+        metaTag.setAttribute('name', name);
       }
+      document.head.appendChild(metaTag);
+      previousMeta.set(name, '');
       
       metaTag.setAttribute('content', content);
     };

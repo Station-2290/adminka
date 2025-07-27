@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
+import { 
+  Coffee, 
+  Home, 
+  Key, 
+  Menu, 
+  Package,
+  Settings,
+  ShoppingCart,
+  Users
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { 
-  Home, 
-  Users, 
-  Package, 
-  ShoppingCart, 
-  Coffee,
-  Settings,
-  Key,
-  Menu
-} from 'lucide-react';
 
 const navigation = [
   { name: 'Главная', href: '/dashboard', icon: Home },

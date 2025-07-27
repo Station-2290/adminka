@@ -1,15 +1,15 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
+import { ArrowLeft, Save } from 'lucide-react';
+import type { components } from '@/__generated__/api/index';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Save } from 'lucide-react';
 import { useCreateCategory } from '@/hooks/useCategories';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
-import type { components } from '@/__generated__/api/index';
 
 type CreateCategoryDto = components['schemas']['CreateCategoryDto'];
 

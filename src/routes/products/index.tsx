@@ -1,5 +1,7 @@
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import { Link, createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
+import { AlertCircle, Edit, Eye, Package, Plus, Search, Trash2 } from 'lucide-react';
+import type { components } from '@/__generated__/api/index';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
@@ -15,10 +17,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { MobileCard, MobileCardHeader, MobileCardRow } from '@/components/ui/mobile-card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Search, Plus, Edit, Trash2, Package, AlertCircle, Eye } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
-import type { components } from '@/__generated__/api/index';
 
 type Product = components['schemas']['Product'];
 
@@ -43,8 +43,8 @@ function ProductsPage() {
   const products = productsResponse?.data || [];
   
   const filteredProducts = products.filter((product: Product) =>
-    product.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.sku?.toLowerCase().includes(searchTerm.toLowerCase())
+    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    product.sku.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const getStockBadge = (stock: number) => {
@@ -357,6 +357,7 @@ function ProductsPage() {
                 ))}
               </div>
 
+              {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
               {filteredProducts.length === 0 && !isLoading && (
                 <div className="text-center py-8 text-muted-foreground">
                   Продукты не найдены

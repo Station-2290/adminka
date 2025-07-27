@@ -1,5 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
+import { AlertCircle, Copy, Edit, Eye, EyeOff, Key, Plus, Search, Trash2 } from 'lucide-react';
+import type { components } from '@/__generated__/api/index';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
@@ -14,11 +16,9 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { MobileCard, MobileCardHeader, MobileCardRow } from '@/components/ui/mobile-card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Search, Plus, Copy, Edit, Trash2, Key, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useApiKeys } from '@/hooks/useApiKeys';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
-import type { components } from '@/__generated__/api/index';
 
 type ApiKey = components['schemas']['ApiKeyResponseDto'];
 

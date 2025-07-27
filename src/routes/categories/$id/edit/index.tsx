@@ -1,5 +1,7 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { AlertCircle, ArrowLeft, Save } from 'lucide-react';
+import type { components } from '@/__generated__/api/index';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,10 +10,8 @@ import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { ArrowLeft, Save, AlertCircle } from 'lucide-react';
 import { useCategory, useUpdateCategory } from '@/hooks/useCategories';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
-import type { components } from '@/__generated__/api/index';
 
 type UpdateCategoryDto = components['schemas']['UpdateCategoryDto'];
 

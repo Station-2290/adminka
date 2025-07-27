@@ -1,13 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { Coffee, Package, ShoppingCart, Users } from 'lucide-react';
+import type { components } from '@/__generated__/api/index';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Package, ShoppingCart, Coffee } from 'lucide-react';
 import { useUsers } from '@/hooks/useUsers';
 import { useProducts } from '@/hooks/useProducts';
 import { useOrders } from '@/hooks/useOrders';
 import { useCategories } from '@/hooks/useCategories';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
-import type { components } from '@/__generated__/api/index';
 
 type User = components['schemas']['User'];
 type Product = components['schemas']['Product'];
@@ -38,15 +38,15 @@ function Dashboard() {
   const stats = [
     {
       title: 'Пользователи',
-      value: usersLoading ? '...' : users?.length?.toString(),
-      description: usersLoading ? 'Загрузка...' : `${users?.filter((u: User) => u.is_active).length} активных`,
+      value: usersLoading ? '...' : users.length.toString(),
+      description: usersLoading ? 'Загрузка...' : `${users.filter((u: User) => u.is_active).length} активных`,
       icon: Users,
       color: 'text-blue-600',
       loading: usersLoading,
     },
     {
       title: 'Продукты',
-      value: productsLoading ? '...' : products.length?.toString(),
+      value: productsLoading ? '...' : products.length.toString(),
       description: productsLoading ? 'Загрузка...' : `${products.filter((p: Product) => p.is_active).length} в наличии`,
       icon: Package,
       color: 'text-green-600',
@@ -135,6 +135,7 @@ function Dashboard() {
               </div>
             ) : (
               <div className="space-y-4">
+                {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
                 {orders.slice(0, 5).map((order: Order, i: number) => (
                   <div key={order.id || i} className="flex items-center justify-between p-3 bg-muted rounded-lg">
                     <div>
@@ -148,7 +149,7 @@ function Dashboard() {
                         {order.total_amount} ₽
                       </p>
                       <p className="text-xs md:text-sm text-muted-foreground">
-                        {order.status || 'В работе'}
+                        {order.status}
                       </p>
                     </div>
                   </div>
@@ -195,6 +196,7 @@ function Dashboard() {
               </div>
             ) : (
               <div className="space-y-4">
+                {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
                 {products.slice(0, 5).map((product: Product, i: number) => (
                   <div key={product.id || i} className="flex items-center justify-between p-3 bg-muted rounded-lg">
                     <div>

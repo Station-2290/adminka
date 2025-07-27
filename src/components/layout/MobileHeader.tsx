@@ -1,3 +1,4 @@
+import { LogOut, Settings, User } from 'lucide-react';
 import { MobileNav } from './MobileNav';
 import { useAuth } from '@/shared/auth';
 import { Button } from '@/components/ui/button';
@@ -9,7 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOut, Settings, User } from 'lucide-react';
 
 export function MobileHeader() {
   const { user, logout } = useAuth();
@@ -35,7 +35,7 @@ export function MobileHeader() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0 bg-primary hover:bg-primary/90">
               <span className="text-xs font-medium text-primary-foreground">
-                {user?.username?.[0]?.toUpperCase() || 'A'}
+                {user?.username[0]?.toUpperCase() || 'A'}
               </span>
             </Button>
           </DropdownMenuTrigger>

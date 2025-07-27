@@ -1,17 +1,17 @@
 import { Link, useLocation } from '@tanstack/react-router';
+import { 
+  Coffee, 
+  Home, 
+  Key, 
+  LogOut, 
+  Package,
+  Settings,
+  ShoppingCart,
+  Users
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { 
-  Home, 
-  Users, 
-  Package, 
-  ShoppingCart, 
-  Coffee,
-  Settings,
-  LogOut,
-  Key
-} from 'lucide-react';
 import { useAuth } from '@/shared/auth';
 
 const navigation = [
@@ -71,7 +71,7 @@ export function Sidebar() {
         <div className="flex items-center space-x-3 mb-3">
           <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
             <span className="text-xs font-medium text-primary-foreground">
-              {user?.username?.[0]?.toUpperCase() || 'A'}
+              {user?.username[0]?.toUpperCase() || 'A'}
             </span>
           </div>
           <div className="flex-1 min-w-0">

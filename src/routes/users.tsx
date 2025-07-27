@@ -1,5 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
+import { AlertCircle, Edit, Plus, Search, Trash2 } from 'lucide-react';
+import type { components } from '@/__generated__/api/index';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
@@ -15,10 +17,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { MobileCard, MobileCardHeader, MobileCardRow } from '@/components/ui/mobile-card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Search, Plus, Edit, Trash2, AlertCircle } from 'lucide-react';
 import { useUsers } from '@/hooks/useUsers';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
-import type { components } from '@/__generated__/api/index';
 
 type User = components['schemas']['User'];
 
@@ -54,16 +54,15 @@ function UsersPage() {
   });
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   
   const { data: usersResponse, isLoading, error } = useUsers(page, 20);
   
   const users = usersResponse?.data || [];
-  const meta = usersResponse?.meta;
   
   const filteredUsers = users.filter((user: User) =>
-    user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.username?.toLowerCase().includes(searchTerm.toLowerCase())
+    user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (error) {
@@ -261,7 +260,7 @@ function UsersPage() {
                 ))}
               </div>
 
-              {filteredUsers.length === 0 && !isLoading && (
+              {filteredUsers.length === 0 && (
                 <div className="text-center py-8 text-muted-foreground">
                   Пользователи не найдены
                 </div>

@@ -1,5 +1,7 @@
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import { Link, createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
+import { AlertCircle, ArrowDown, ArrowUp, Coffee, Edit, Eye, Plus, Search, Trash2 } from 'lucide-react';
+import type { components } from '@/__generated__/api/index';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
@@ -15,10 +17,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { MobileCard, MobileCardHeader, MobileCardRow } from '@/components/ui/mobile-card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Search, Plus, Edit, Trash2, Coffee, ArrowUp, ArrowDown, AlertCircle, Eye } from 'lucide-react';
 import { useCategories } from '@/hooks/useCategories';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
-import type { components } from '@/__generated__/api/index';
 
 type Category = components['schemas']['Category'];
 
@@ -43,8 +43,8 @@ function CategoriesPage() {
   const filteredCategories = categories.filter((category: Category) => {
     const description = typeof category.description === 'string' ? category.description : '';
     return (
-      category.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      category.slug?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      category.slug.toLowerCase().includes(searchTerm.toLowerCase()) ||
       description.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });

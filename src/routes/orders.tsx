@@ -1,5 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
+import { AlertCircle, Edit, Eye, Search, ShoppingCart, X } from 'lucide-react';
+import type { components } from '@/__generated__/api/index';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
@@ -22,10 +24,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Search, Eye, Edit, X, ShoppingCart, AlertCircle } from 'lucide-react';
 import { useOrders } from '@/hooks/useOrders';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
-import type { components } from '@/__generated__/api/index';
 
 type Order = components['schemas']['Order'];
 
@@ -66,17 +66,16 @@ function OrdersPage() {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   
   const statusValue = statusFilter === 'all' ? undefined : statusFilter as Order['status'];
   const { data: ordersResponse, isLoading, error } = useOrders(page, 50, statusValue);
   
   const orders = ordersResponse?.data || [];
-  const meta = ordersResponse?.meta;
 
   const filteredOrders = orders.filter((order: Order) => {
-    const matchesSearch = order.order_number?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      order.id?.toString().includes(searchTerm);
+    const matchesSearch = order.order_number.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.id.toString().includes(searchTerm);
     
     return matchesSearch;
   });
