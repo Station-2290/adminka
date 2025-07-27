@@ -13,8 +13,8 @@ export default [
       "prettier.config.js",
       "vite.config.ts",
       "vitest.config.ts",
-      "src/__generated__/api/index.ts",
-      "src/components/ui/**/*",
+      "**/__generated__/**/*",
+      "**/components/ui/**/*",
     ],
     rules: {
       "@typescript-eslint/no-unused-vars": [
