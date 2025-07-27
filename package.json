@@ -8,8 +8,8 @@
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest run --passWithNoTests --config vitest.config.ts",
-    "lint": "eslint",
-    "format": "prettier",
+    "lint": "eslint . --fix",
+    "format": "prettier . --write",
     "check": "prettier --write . && eslint --fix",
     "postinstall": "pnpm gen:api",
     "gen:api": "openapi-typescript ./__schemas__/openapi.json -o ./src/__generated__/api/index.ts"

@@ -9,7 +9,11 @@ export default [
       "**/__generated__/**/*",
       "**/__schemas__/**/*",
       "**/src/types/**/*",
-      "src/__generated__/**/*",
+      "eslint.config.js",
+      "prettier.config.js",
+      "vite.config.ts",
+      "vitest.config.ts",
+      "src/__generated__/api/index.ts",
       "src/components/ui/**/*",
     ],
     rules: {
